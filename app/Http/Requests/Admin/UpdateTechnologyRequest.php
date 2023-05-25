@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class UpdateTechnologyRequest extends FormRequest
 {
@@ -13,7 +14,14 @@ class UpdateTechnologyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'slug' => Str::slug($this->name),
+        ]);
     }
 
     /**
@@ -24,7 +32,9 @@ class UpdateTechnologyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|max:100|unique:types,name',
+            'description' => 'nullable',
+            'slug' => 'max:100|unique:types,slug',
         ];
     }
 }
