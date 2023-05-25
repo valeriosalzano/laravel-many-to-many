@@ -14,7 +14,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Cover Link</th>
+                <th scope="col">Type</th>
+                <th scope="col">Technologies</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -24,7 +25,15 @@
                 <tr class="project-container">
                     <td>{{ $project->id }}</td>
                     <td class="project-title">{{ $project->title }}</td>
-                    <td>{{ $project->cover_image }}</td>
+                    <td>{{ $project->type ? $project->type->name : 'NULL'}}</td>
+                    <td>
+                        
+                        @forelse ($project->techonologies as $technology)
+                        <span class="badge rounded-pill text-bg-secondary p-1">{{$technology->name}}</span>
+                        @empty
+                        {{'NULL'}}
+                        @endforelse
+                    </td>
                     <td>{{ $project->slug }}</td>
                     <td>
                         <div class="d-flex justify-content-between align-items-center">
