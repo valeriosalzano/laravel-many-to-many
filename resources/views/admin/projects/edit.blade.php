@@ -41,7 +41,24 @@
 
             @include(
                 'partials.forms.edit_form_element',
-                $data = ['type' => 'select', 'field' => 'type_id', 'label' => 'Type', 'options' => $types, 'default' => $project->type_id]
+                $data = [
+                    'type' => 'select',
+                    'field' => 'type_id',
+                    'label' => 'Type',
+                    'options' => $types,
+                    'default' => $project->type_id,
+                ]
+            )
+
+            @include(
+                'partials.forms.edit_form_element',
+                $data = [
+                    'type' => 'checkboxes',
+                    'field' => 'technologies',
+                    'options' => $technologies,
+                    'label' => 'Technology:',
+                    'default' => $project->techonologies,
+                ]
             )
 
             <button type="submit" class="btn btn-primary">Submit</button>

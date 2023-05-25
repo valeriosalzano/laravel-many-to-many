@@ -19,6 +19,22 @@
 
         @include('partials.forms.validation.error_alert', ['field' => $data['field']])
     </div>
+@elseif ($data['type'] == 'checkboxes')
+    <div class="mb-3">
+        <p>{{ $data['label'] }}</p>
+        <ul class="list-group">
+            @foreach ($data['options'] as $index => $option)
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" name="{{ $data['field']}}[]"
+                        @checked(in_array($option->id, old($data['field'], [])))
+                        id="{{ $data['field'] }}_{{ $index }}" value="{{$option->id}}">
+                    <label class="form-check-label"
+                        for="{{ $data['field'] }}_{{ $index }}">{{ $option->name }}</label>
+                </li>
+            @endforeach
+            @include('partials.forms.validation.error_alert', ['field' => $data['field']])
+        </ul>
+    </div>
 @else
     <div class="mb-3">
         <label for="{{ $data['field'] }}" class="form-label">{{ $data['label'] }}:</label>

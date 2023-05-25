@@ -30,6 +30,17 @@
                 'partials.forms.create_form_element',
                 $data = ['type' => 'select', 'field' => 'type_id', 'label' => 'Type', 'options' => $types]
             )
+
+            @include(
+                'partials.forms.create_form_element',
+                $data = [
+                    'type' => 'checkboxes',
+                    'field' => 'technologies',
+                    'options' => $technologies,
+                    'label' => 'Technology:',
+                ]
+            )
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
