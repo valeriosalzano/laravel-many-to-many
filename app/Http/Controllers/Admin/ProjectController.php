@@ -47,6 +47,10 @@ class ProjectController extends Controller
 
         $newProject = Project::create($validated_data);
 
+        if ($request->has('technologies')) {
+            $newProject->technologies()->attach($request->technologies);
+        }
+
         return to_route('admin.projects.show', ['project' => $newProject->slug])
         ->with('status', 'Success! Project created.');
     }
@@ -88,9 +92,7 @@ class ProjectController extends Controller
 
         $validated_data['slug'] = Project::generateSlug($request->title);
 
-        if(Project::where('slug', $validated_data['slug'])->where('id', '<>', $project->id)->first()){
-            return back()->withInput()->withErrors(['slug' => 'Slug already taken. Different title required']);
-        }
+        $project->technologies()->sync($request->technologies);
 
         $project->update($validated_data);
 

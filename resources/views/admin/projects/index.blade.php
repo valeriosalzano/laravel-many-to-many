@@ -28,7 +28,7 @@
                     <td>{{ $project->type ? $project->type->name : 'NULL'}}</td>
                     <td>
                         
-                        @forelse ($project->techonologies as $technology)
+                        @forelse ($project->technologies as $technology)
                         <span class="badge rounded-pill text-bg-secondary p-1">{{$technology->name}}</span>
                         @empty
                         {{'NULL'}}

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class UpdateProjectRequest extends FormRequest
 {
@@ -15,6 +16,13 @@ class UpdateProjectRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'slug' => Str::slug($this->title),
+        ]);
     }
 
     /**
@@ -29,6 +37,7 @@ class UpdateProjectRequest extends FormRequest
             'description' => 'nullable',
             'cover_image' => 'nullable|max:255|url',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ];
     }
 }

@@ -15,7 +15,7 @@ class Project extends Model
         'description',
         'cover_image',
         'slug',
-        'type_id'
+        'type_id',
     ];
 
     public static function generateSlug(string $title) {
@@ -26,7 +26,7 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
-    public function techonologies() {
+    public function technologies() {
         return $this->belongsToMany(Technology::class);
     }
 }

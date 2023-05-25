@@ -20,7 +20,7 @@
         </h5>
         <h5>
             {{'Technology: '}}   
-            @forelse ($project->techonologies as $technology)
+            @forelse ($project->technologies as $technology)
             <span class="badge rounded-pill text-bg-secondary p-1">{{$technology->name}}</span>
             @empty
             {{'NULL'}}

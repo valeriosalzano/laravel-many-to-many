@@ -57,7 +57,7 @@
                     'field' => 'technologies',
                     'options' => $technologies,
                     'label' => 'Technology:',
-                    'default' => $project->techonologies,
+                    'default' => $project->technologies,
                 ]
             )
 

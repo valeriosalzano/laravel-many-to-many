@@ -26,9 +26,9 @@
             @foreach ($data['options'] as $index => $option)
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="checkbox" name="{{ $data['field'] . '[]' }}"
-                        id="{{ $data['field'] }}_{{ $index }}"
+                        id="{{ $data['field'] }}_{{ $index }}" value="{{$option->id}}"
                         @if ($errors->any())
-                            @checked(in_array($option->id, old($data['field']), [] ))
+                            @checked(in_array($option->id, old($data['field'],[])))
                         @else
                             @checked($data['default']->contains($option->id)) @endif>
                     <label class="form-check-label"
