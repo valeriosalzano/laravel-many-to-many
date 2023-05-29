@@ -25,7 +25,7 @@
                     'default' => $project->cover_image,
                     'type' => 'file',
                     'field' => 'cover_image',
-                    'label' => 'project cover link',
+                    'label' => 'Cover file',
                 ]
             )
 
