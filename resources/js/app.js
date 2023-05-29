@@ -10,3 +10,5 @@ import { addSweetDelete } from './sweet_delete';
 addSweetDelete('.sweet-delete.btn','.project-container','.project-title');
 // *** TYPE DELETE ***
 addSweetDelete('.sweet-delete.btn','.type-container','.type-name');
+// *** TECHNOLOGY DELETE ***
+addSweetDelete('.sweet-delete.btn','.technology-container','.technology-name');
