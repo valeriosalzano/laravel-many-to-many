@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])
             'projects' => 'project:slug'
         ]);
 
+        Route::get('projects/{project}/deleteImg', [ProjectController::class, 'deleteImg'])->name('projects.deleteImg');
+
         Route::resource('types', TypeController::class)->parameters([
             'types' => 'type:slug'
         ]);

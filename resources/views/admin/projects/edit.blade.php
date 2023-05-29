@@ -26,6 +26,7 @@
                     'type' => 'file',
                     'field' => 'cover_image',
                     'label' => 'Cover file',
+                    'delete_btn' => ['project' => $project],
                 ]
             )
 

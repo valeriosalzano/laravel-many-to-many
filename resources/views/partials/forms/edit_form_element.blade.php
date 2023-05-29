@@ -49,7 +49,13 @@
         @if ($data['default'])
         <div class="container-fluid w-50">
             <p class="text-center">Last cover preview</p>
-            <img class="img-fluid" src="{{asset('storage/'.$data['default'])}}" alt="immagine non disponibile">
+            <div class="img-container position-relative">
+                <a href="{{route('admin.projects.deleteImg', $data['delete_btn'])}}" class="position-absolute top-0 end-0 m-2 btn btn-danger">
+                    X
+                </a>
+                <img class="img-fluid" src="{{asset('storage/'.$data['default'])}}" alt="immagine non disponibile">
+            </div>
+            
         </div>            
         @endif
     </div>

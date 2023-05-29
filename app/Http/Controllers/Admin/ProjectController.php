@@ -131,4 +131,15 @@ class ProjectController extends Controller
         $project->delete();
         return to_route('admin.projects.index');
     }
+
+    public function deleteImg(Project $project)
+    {
+        if ($project->cover_image){
+            Storage::delete($project->cover_image);
+            $project->cover_image = null;
+            $project->save();
+        }
+
+        return to_route('admin.projects.edit', $project->slug);
+    }
 }
