@@ -26,9 +26,8 @@
             @foreach ($data['options'] as $index => $option)
                 <li class="list-group-item">
                     <input class="form-check-input me-1" type="checkbox" name="{{ $data['field'] . '[]' }}"
-                        id="{{ $data['field'] }}_{{ $index }}" value="{{$option->id}}"
-                        @if ($errors->any())
-                            @checked(in_array($option->id, old($data['field'],[])))
+                        id="{{ $data['field'] }}_{{ $index }}" value="{{ $option->id }}"
+                        @if ($errors->any()) @checked(in_array($option->id, old($data['field'],[])))
                         @else
                             @checked($data['default']->contains($option->id)) @endif>
                     <label class="form-check-label"
@@ -37,6 +36,21 @@
             @endforeach
             @include('partials.forms.validation.error_alert', ['field' => $data['field']])
         </ul>
+    </div>
+@elseif ($data['type'] == 'file')
+    <div class="mb-3">
+        @if ($data['default'])
+        <div class="container-fluid h-100">
+            <img class="img-fluid" src="{{asset('storage/'.$data['default'])}}" alt="immagine non disponibile">
+        </div>            
+        @endif
+        <div>
+            <label for="{{ $data['field'] }}" class="form-label">{{ $data['label'] }}:</label>
+            <input type="{{ $data['type'] }}"
+                class="form-control @error($data['field']) is-invalid border-2 border-danger border @enderror"
+                id="{{ $data['field'] }}" name="{{ $data['field'] }}">
+            @include('partials.forms.validation.error_alert', ['field' => $data['field']])
+        </div>
     </div>
 @else
     <div class="mb-3">

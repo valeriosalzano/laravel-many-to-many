@@ -7,7 +7,7 @@
 
         @include('partials.forms.validation.errors_alert')
 
-        <form method="POST" action="{{ route('admin.projects.store') }}">
+        <form method="POST" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
 
             @csrf
 
@@ -18,17 +18,17 @@
 
             @include(
                 'partials.forms.create_form_element',
-                $data = ['type' => 'text', 'field' => 'cover_image', 'label' => 'Project cover url']
+                $data = ['type' => 'file', 'field' => 'cover_image', 'label' => 'Project image file']
             )
 
             @include(
                 'partials.forms.create_form_element',
-                $data = ['type' => 'textarea', 'field' => 'description', 'label' => 'Description']
+                $data = ['type' => 'textarea', 'field' => 'description', 'label' => 'Project Description']
             )
 
             @include(
                 'partials.forms.create_form_element',
-                $data = ['type' => 'select', 'field' => 'type_id', 'label' => 'Type', 'options' => $types]
+                $data = ['type' => 'select', 'field' => 'type_id', 'label' => 'Project Type', 'options' => $types]
             )
 
             @include(
@@ -37,7 +37,7 @@
                     'type' => 'checkboxes',
                     'field' => 'technologies',
                     'options' => $technologies,
-                    'label' => 'Technology:',
+                    'label' => 'Project Technologies:',
                 ]
             )
 

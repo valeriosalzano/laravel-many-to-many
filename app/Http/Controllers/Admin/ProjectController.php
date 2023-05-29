@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreProjectRequest;
 use App\Http\Requests\Admin\UpdateProjectRequest;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -44,6 +45,11 @@ class ProjectController extends Controller
     {
 
         $validated_data = $request->validated();
+
+        if($request->hasFile('cover_image')) {
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
+        }
 
         $newProject = Project::create($validated_data);
 
@@ -90,7 +96,18 @@ class ProjectController extends Controller
     {
         $validated_data = $request->validated();
 
-        $validated_data['slug'] = Project::generateSlug($request->title);
+        // $validated_data['slug'] = Project::generateSlug($request->title);
+
+        if ($request->hasFile('cover_image')) {
+
+            if ($project->cover_image) {
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::put('cover', $request->cover_image);
+            $validated_data['cover_image'] = $path;
+
+        }
 
         $project->technologies()->sync($request->technologies);
 
@@ -108,6 +125,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->cover_image) {
+            Storage::delete($project->cover_image);
+        }
         $project->delete();
         return to_route('admin.projects.index');
     }

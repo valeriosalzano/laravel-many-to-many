@@ -8,7 +8,7 @@
 
         @include('partials.forms.validation.errors_alert')
 
-        <form method="POST" action=" {{ route('admin.projects.update', ['project' => $project->slug]) }}">
+        <form method="POST" action=" {{ route('admin.projects.update', ['project' => $project->slug]) }}" enctype="multipart/form-data">
 
             @csrf
 
@@ -23,7 +23,7 @@
                 'partials.forms.edit_form_element',
                 $data = [
                     'default' => $project->cover_image,
-                    'type' => 'text',
+                    'type' => 'file',
                     'field' => 'cover_image',
                     'label' => 'project cover link',
                 ]
