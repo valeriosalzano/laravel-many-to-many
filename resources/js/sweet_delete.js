@@ -1,26 +1,33 @@
 export function addSweetDelete(btnQuery,wrapperQuery,titleQuery) {
-    const deleteComicBtns = document.querySelectorAll(btnQuery);
-    deleteComicBtns.forEach( btn => {
-        console.log('foreach entered')
+    const deleteBtns = document.querySelectorAll(btnQuery);
+    deleteBtns.forEach( btn => {
         btn.addEventListener('click', event => {
             event.preventDefault();
     
-            const comicTitle = btn.closest(wrapperQuery).querySelector(titleQuery).innerHTML;
+            const elementTitle = btn.closest(wrapperQuery).querySelector(titleQuery).innerHTML;
     
-            const deleteComicAlert = document.getElementById('sweet-delete-alert');
-            deleteComicAlert.querySelector('h2').innerHTML = comicTitle;
-            deleteComicAlert.classList.remove('d-none')
+            const deleteAlert = document.getElementById('sweet-delete-alert');
+            deleteAlert.querySelector('h2').innerHTML = elementTitle;
+            deleteAlert.classList.remove('d-none')
     
-            const confirmDeleteBtn = deleteComicAlert.querySelector('.confirm.btn');
-            const dismissBtn = deleteComicAlert.querySelector('.dismiss.btn');
+            const confirmDeleteBtn = deleteAlert.querySelector('.confirm.btn');
+            const dismissBtn = deleteAlert.querySelector('.dismiss.btn');
     
             confirmDeleteBtn.addEventListener('click', () => {
                 btn.parentElement.submit();
             });
     
             dismissBtn.addEventListener('click', () => {
-                deleteComicAlert.classList.add('d-none');
+                deleteAlert.classList.add('d-none');
             })
         })
+    })
+}
+
+export function addFormElementDelete(fieldName){
+    const deleteBtn = document.querySelector('.'+fieldName+'.btn');
+    deleteBtn.addEventListener('click', () => {
+        const deleteForm = document.querySelector('.'+fieldName+' form');
+        deleteForm.submit();
     })
 }

@@ -8,7 +8,8 @@
 
         @include('partials.forms.validation.errors_alert')
 
-        <form method="POST" action=" {{ route('admin.projects.update', ['project' => $project->slug]) }}" enctype="multipart/form-data">
+        <form method="POST" action=" {{ route('admin.projects.update', ['project' => $project->slug]) }}"
+            enctype="multipart/form-data">
 
             @csrf
 
@@ -26,7 +27,6 @@
                     'type' => 'file',
                     'field' => 'cover_image',
                     'label' => 'Cover file',
-                    'delete_btn' => ['project' => $project],
                 ]
             )
 
@@ -65,4 +65,14 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    @include(
+        'partials.forms.edit_form_element',
+        $data = [
+            'type' => 'delete-form',
+            'field' => 'cover_image',
+            'delete-file-object' => $project,
+            'delete-file-route' => 'admin.projects.deleteImg',
+        ]
+    )
 @endsection

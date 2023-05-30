@@ -47,17 +47,23 @@
             @include('partials.forms.validation.error_alert', ['field' => $data['field']])
         </div>
         @if ($data['default'])
-        <div class="container-fluid w-50">
-            <p class="text-center">Last cover preview</p>
-            <div class="img-container position-relative">
-                <a href="{{route('admin.projects.deleteImg', $data['delete_btn'])}}" class="position-absolute top-0 end-0 m-2 btn btn-danger">
-                    X
-                </a>
-                <img class="img-fluid" src="{{asset('storage/'.$data['default'])}}" alt="immagine non disponibile">
+            <div class="container-fluid w-50">
+                <p class="text-center">Last cover preview</p>
+                <div class="img-container position-relative">
+                    <span class="position-absolute top-0 end-0 m-2 btn btn-danger {{ $data['field'] }}"> X </span>
+                    <img class="img-fluid" src="{{ asset('storage/' . $data['default']) }}"
+                        alt="immagine non disponibile">
+                </div>
             </div>
-            
-        </div>            
         @endif
+    </div>
+@elseif ($data['type'] == 'delete-form')
+    <div class="delete-form-container {{ $data['field'] }}">
+        <form action="{{ route($data['delete-file-route'], $data['delete-file-object']) }}" method="POST">
+            @csrf
+            @method('DELETE')
+        </form>
+
     </div>
 @else
     <div class="mb-3">
